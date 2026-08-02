@@ -210,12 +210,19 @@ The application will
 GET /health
 ```
 
+The endpoint checks:
+
+- Redis connectivity
+- MySQL connectivity
+
+They can easily be extended to include additional infrastructure services.
+
 Example response
 
 ```json
 {
   "status": "UP",
-  "checks": {
+  "details": {
     "redis": {
       "status": "UP"
     },
