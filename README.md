@@ -1,10 +1,10 @@
 # redis-messaging-sample
 
-A complete example demonstrating how to build an event-driven application using **redis-messaging**.
+A complete example demonstrating how to build an event-driven application using [**redis-messaging**](https://www.npmjs.com/package/redis-messaging).
 
 This sample shows how to publish messages, consume them asynchronously, validate incoming data, retry failed processing, persist data into MySQL, and expose health endpoints suitable for Kubernetes and cloud-native deployments.
 
-Rather than being a simple Redis Pub/Sub example, this project demonstrates how `redis-messaging` integrates with the Core TypeScript ecosystem to build production-ready services.
+Rather than being a simple Redis Pub/Sub example, this project demonstrates how [`redis-messaging`](https://www.npmjs.com/package/redis-messaging) integrates with the [**core-ts**](https://github.com/core-ts) ecosystem to build production-ready services.
 
 ---
 
