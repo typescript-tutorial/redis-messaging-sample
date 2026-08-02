@@ -336,6 +336,24 @@ Highlights include:
 
 ---
 
+# Context Composition
+
+The createContext() function acts as a composition root.
+
+It wires together:
+
+- Redis Pubsub
+- Health service
+- Validation
+- MySQL
+- Retry
+- Logging
+- Processor
+
+without mixing business logic.
+
+That's exactly where dependency injection should happen.
+
 # Ecosystem Integration
 
 This sample demonstrates how several [**core-ts**](https://github.com/core-ts) libraries work together.
