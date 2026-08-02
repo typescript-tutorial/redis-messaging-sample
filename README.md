@@ -336,7 +336,9 @@ Highlights include:
 
 ---
 
-# Libraries Used
+# Ecosystem Integration
+
+This sample demonstrates how several [**core-ts**](https://github.com/core-ts) libraries work together.
 
 | Library                                                                  | Purpose                        |
 | ------------------------------------------------------------------------ | ------------------------------ |
@@ -347,6 +349,10 @@ Highlights include:
 | [`health-service`](https://www.npmjs.com/package/health-service)         | Health endpoint                |
 | [`logger-core`](https://www.npmjs.com/package/logger-core)               | Structured logging             |
 | [`config-plus`](https://www.npmjs.com/package/config-plus)               | Configuration management       |
+
+Each library focuses on a single responsibility.
+
+That demonstrates the intended layering very well.
 
 ---
 
