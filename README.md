@@ -73,31 +73,13 @@ Rather than being a simple Redis Pub/Sub example, this project demonstrates how 
 
 # Project Structure
 
-```
-src/
-│
-├── controllers/
-│   ├── HealthController.ts
-│   └── PublishController.ts
-│
-├── database/
-│   ├── MySQLWriter.ts
-│   └── connection.ts
-│
-├── messaging/
-│   ├── Processor.ts
-│   ├── RetryWriter.ts
-│   └── context.ts
-│
-├── models/
-│   └── User.ts
-│
-├── validation/
-│   └── validator.ts
-│
-├── config.cs
+```text
+src
+├── config.ts
 ├── context.ts
-└── index.ts
+├── index.ts
+└── user
+    └── index.ts
 ```
 
 ---
@@ -347,14 +329,17 @@ Highlights include:
 
 ---
 
-# Related Projects
+# Libraries Used
 
-- redis-messaging
-- mysql2-core
-- validation-core
-- message-processing
-- config-plus
-- health-service
+| Library                                                                  | Purpose                        |
+| ------------------------------------------------------------------------ | ------------------------------ |
+| [`redis-messaging`](https://www.npmjs.com/package/redis-messaging)       | Publish and subscribe to Redis |
+| [`message-processing`](https://www.npmjs.com/package/message-processing) | Retry and error handling       |
+| [`mysql2-core`](https://www.npmjs.com/package/mysql2-core)               | Write data into MySQL          |
+| [`validation-core`](https://www.npmjs.com/package/validation-core)       | Validate incoming messages     |
+| [`health-service`](https://www.npmjs.com/package/health-service)         | Health endpoint                |
+| [`logger-core`](https://www.npmjs.com/package/logger-core)               | Structured logging             |
+| [`config-plus`](https://www.npmjs.com/package/config-plus)               | Configuration management       |
 
 ---
 

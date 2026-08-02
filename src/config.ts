@@ -7,7 +7,6 @@ export const config = {
       time: "@timestamp",
       msg: "message",
     },
-    db: true,
   },
   middleware: {
     log: true,
@@ -24,10 +23,15 @@ export const config = {
     database: "masterdata",
     multipleStatements: true,
   },
-  channel: "users",
+  retries: {
+    1: 10000,
+    2: 15000,
+    3: 25000,
+  },
   redis: {
     url: "redis://localhost:6379",
   },
+  channel: "users",
 }
 
 export const environments = {

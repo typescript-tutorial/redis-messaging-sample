@@ -1,17 +1,20 @@
 import { merge } from "config-plus"
 import dotenv from "dotenv"
+import { getBody, LogController } from "health-service"
 import http from "http"
-import { createLogger, getBody } from "logger-core"
-import { toString } from "message-processing"
+import { createLogger, updateLog } from "logger-core"
+import { createRetry, toString } from "message-processing"
 import { createPool } from "mysql2-core"
 import { createClient } from "redis"
 import { config, environments } from "./config"
 import { createContext } from "./context"
 
+const logger = createLogger(config.log)
+
 dotenv.config()
 const cfg = merge(config, process.env, environments, process.env.ENV)
+updateLog(logger, cfg.log)
 
-const logger = createLogger(cfg.log)
 const pool = createPool(cfg.db)
 const client = createClient(cfg.redis)
 
@@ -22,12 +25,17 @@ client.on("error", (err) => {
   logger.error("Redis Error:" + toString(err))
 })
 
-createContext(pool, client, cfg.channel, logger).then((ctx) => {
+const retries = createRetry(cfg.retries)
+
+createContext(pool, client, cfg.channel, logger, retries).then((ctx) => {
+  const log = new LogController(logger, updateLog)
   ctx.subscribe(ctx.process)
   http
     .createServer((req, res) => {
       if (req.url === "/health") {
         ctx.health.check(req, res)
+      } else if (req.url === "/log") {
+        log.config(req, res)
       } else if (req.url === "/send") {
         getBody(req)
           .then((body: any) => {
