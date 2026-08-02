@@ -343,6 +343,129 @@ Highlights include:
 
 ---
 
+# Separation of Responsibilities
+
+One of the goals of this sample is to demonstrate proper layering.
+
+## redis-messaging
+
+Responsible for:
+
+- Producer
+- Consumer
+- Header mapping
+- Health checking
+
+---
+
+## message-processing
+
+Responsible for:
+
+- JSON deserialization
+- Validation
+- Processing pipeline
+- Retry
+- Error handling
+- Logging
+
+---
+
+## Business Layer
+
+Responsible only for business logic.
+
+```
+Process Order
+
+Save Customer
+
+Import Product
+
+Send Notification
+```
+
+Business services remain independent of NATS.
+
+---
+
+# Why This Architecture?
+
+Instead of embedding business logic inside RabbitMQ consumers,
+
+```
+  Consumer
+
+      ↓
+
+Business Logic
+
+      ↓
+
+   Database
+
+      ↓
+
+    Retry
+
+      ↓
+
+  Validation
+```
+
+the sample separates every concern.
+
+```
+  Consumer
+
+      ↓
+
+  Processor
+
+      ↓
+
+  Validation
+
+      ↓
+
+    Retry
+
+      ↓
+
+Business Logic
+
+      ↓
+
+    Writer
+```
+
+Each layer has a single responsibility.
+
+This makes the application:
+
+- easier to maintain
+- easier to test
+- easier to replace infrastructure
+- easier to extend
+
+---
+
+# Production Considerations
+
+This sample demonstrates production-oriented practices including:
+
+- Layered architecture
+- Strong typing
+- Validation
+- Retry processing
+- Logging
+- Health monitoring
+- Infrastructure abstraction
+
+Additional production features such as dead-letter queues, delayed retry queues, metrics, and distributed tracing can be added without changing the application architecture.
+
+---
+
 # License
 
 MIT
