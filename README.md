@@ -304,7 +304,7 @@ This approach helps improve reliability when temporary database or network issue
 
 # Validation
 
-Incoming messages are validated before persistence.
+Messages are validated by [`validation-core`](https://www.npmjs.com/package/validation-core) before reaching business logic.
 
 Typical validation includes
 
@@ -314,6 +314,22 @@ Typical validation includes
 - Business constraints
 
 Invalid messages are rejected before reaching the database.
+
+```
+ Redis Pubsub
+
+      ↓
+
+  Processor
+
+      ↓
+
+  Validator
+
+      ↓
+
+Business Logic
+```
 
 ---
 
